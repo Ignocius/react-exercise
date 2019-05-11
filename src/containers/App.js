@@ -6,42 +6,38 @@ import Scroll from '../components/Scroll';
 import ErrorBoundry from '../components/ErrorBoundry';
 import './App.css';
 
-import { setSearchField } from '../actions';
+import { setSearchField, requestRobots } from '../actions';
+import { runInThisContext } from 'vm';
 
 const mapStateToProps = state => {
 
     return {
-        searchField: state.searchField
+        searchField: state.searchRobots.searchField,
+        robots: state.requestRobots.robots,
+        isPending: state.requestRobots.isPending,
+        error: state.requestRobots.error
     }
 }
 
 const mapDispatchToProps = (dispatch)=> {
     return {
-        onSeearchChange: (event) => dispatch(setSearchField(event.target.value))
+        onSeearchChange: (event) => dispatch(setSearchField(event.target.value)),
+        onRequestRobots: () => dispatch(requestRobots())
     } 
 }
 class App extends Component {
-    constructor() {
-        super()
-        this.state ={
-            robots: []
-        }
-    }
     
     async componentDidMount() {
-        const data = await fetch('https://jsonplaceholder.typicode.com/users')
-        const users = await data.json()
-        this.setState({ robots: users, loading: false })
+      await this.props.onRequestRobots
     }
 
     render() {
-        const { robots } = this.state;
-        const { searchField, onSeearchChange } = this.props;
+        const { searchField, onSeearchChange, robots, isPending } = this.props;
         const filteredRobots = robots.filter(robot => robot.name.toLowerCase().includes(searchField.toLowerCase()))
         return (
             <div className="tc">
                 <h1 className='f2'>RoboFriends</h1>
-                {!robots.length ? (
+                {isPending ? (
                     <h2>Loading</h2>
                 ) : (
                     <div>

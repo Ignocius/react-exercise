@@ -10,7 +10,7 @@ export const setSearchField = (text) => ({
     payload: text
 })
 
-export const rquestRobots = async (dispatch) => {
+export const requestRobots = () => async (dispatch) => {
     dispatch({ type: REQUEST_ROBOTS_PENDIG }); 
     const data = await fetch('https://jsonplaceholder.typicode.com/users').catch(error => dispatch({ type: REQUEST_ROBOTS_FAILED, payload: error}))
     const users = await data.json()
