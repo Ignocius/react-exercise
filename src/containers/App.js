@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import CardList from '../components/CardList';
 import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll';
+import Header from '../components/Header';
 import ErrorBoundry from '../components/ErrorBoundry';
 import './App.css';
 
@@ -36,11 +37,11 @@ class App extends Component {
         const filteredRobots = robots.filter(robot => robot.name.toLowerCase().includes(searchField.toLowerCase()))
         return (
             <div className="tc">
-                <h1 className='f2'>RoboFriends</h1>
                 {isPending ? (
                     <h2>Loading</h2>
                 ) : (
                     <div>
+                        <Header />
                         <SearchBox searchChange={onSeearchChange} />
                         <Scroll>
                             <ErrorBoundry>
