@@ -28,7 +28,7 @@ const mapDispatchToProps = (dispatch)=> {
 class App extends Component {
     
     async componentDidMount() {
-      await this.props.onRequestRobots
+        await this.props.onRequestRobots();
     }
 
     render() {
