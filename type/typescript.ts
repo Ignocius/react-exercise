@@ -95,6 +95,11 @@ class Dragon {
   }
 }
 
-let dragon = new Dragon('spit fire')
+let dragon = new Dragon('spit fire');
 console.log(dragon.great())
 //dragon.roar  - cannot reach because its private, default is public
+
+// Union
+let confused: string | number = "helklo";
+confused = 5
+confused = false // fail

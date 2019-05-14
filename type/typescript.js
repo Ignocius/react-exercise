@@ -70,3 +70,7 @@ var Dragon = /** @class */ (function () {
 var dragon = new Dragon('spit fire');
 console.log(dragon.great());
 //dragon.roar  - cannot reach because its private, default is public
+// Union
+var confused = "helklo";
+confused = 5;
+confused = false; // fail
